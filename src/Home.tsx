@@ -1,3 +1,13 @@
 import React from "react";
+import {withOAuth} from 'aws-amplify-react'
 
-export const Home = () => (<div>Signed in</div>)
+interface Props {
+  OAuthSignIn: () => void
+}
+const HomeBtn = (props: Props) => (
+  <button onClick={props.OAuthSignIn}>
+    Sign in with AWS
+  </button>
+)
+
+export const Home = withOAuth(HomeBtn)
