@@ -29,10 +29,10 @@ interface Auth0ProviderOptions {
 export const Auth0Context = React.createContext<Auth0Context | null>(null)
 export const useAuth0 = () => useContext(Auth0Context)!
 export const Auth0Provider = ({
-                                children,
-                                onRedirectCallback,
-                                ...initOptions
-                              }: Auth0ProviderOptions & Auth0ClientOptions) => {
+  children,
+  onRedirectCallback,
+  ...initOptions
+}: Auth0ProviderOptions & Auth0ClientOptions) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isInitializing, setIsInitializing] = useState(true)
   const [isPopupOpen, setIsPopupOpen] = useState(false)

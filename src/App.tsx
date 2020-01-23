@@ -8,11 +8,12 @@ import './App.css'
 import {configureStore} from "./store/store"
 import {Home} from './Home'
 import {General} from "./General"
-import { Auth0Provider } from './react-auth0-spa'
+import {Auth0Provider} from './react-auth0-spa'
+import {ProtectedRoute} from './components/ProtectedRoute'
 
-const auth0Domain = process.env.AUTH0_DOMAIN
-const auth0ClientId = process.env.AUTH0_CLIENT_ID
-const auth0Audience = process.env.AUTH0_AUDIENCE
+const auth0Domain = process.env.REACT_APP_AUTH0_DOMAIN
+const auth0ClientId = process.env.REACT_APP_AUTH0_CLIENT_ID
+const auth0Audience = process.env.REACT_APP_AUTH0_AUDIENCE
 const auth0RedirectUri = window.location.origin
 
 if (
@@ -52,22 +53,22 @@ const onAuthRedirectCallback = (redirectResult?: RedirectLoginResult) => {
 
 const App: React.FC = () => {
   return (
-    <Auth0Provider
-      domain={auth0Domain}
-      client_id={auth0ClientId}
-      redirect_uri={auth0RedirectUri}
-      audience={auth0Audience}
-      onRedirectCallback={onAuthRedirectCallback}
-    >
       <Provider store={store}>
         <ConnectedRouter history={history}>
+          <Auth0Provider
+            domain={auth0Domain}
+            client_id={auth0ClientId}
+            redirect_uri={auth0RedirectUri}
+            audience={auth0Audience}
+            onRedirectCallback={onAuthRedirectCallback}
+          >
           <Switch>
             <Route component={Home} path={'/Home'}/>
-            <Route component={General} path={'/General'}/>
+            <ProtectedRoute component={General} path={'/General'}/>
           </Switch>
+          </Auth0Provider>
         </ConnectedRouter>
       </Provider>
-    </Auth0Provider>
   );
 }
 
