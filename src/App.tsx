@@ -29,14 +29,6 @@ if (
 
 const history = createBrowserHistory();
 const store = configureStore(history, {});
-const token = localStorage.getItem('token');
-
-if (token) {
-  axios.defaults.headers.common['Authorization'] = `Authorization ${token}`;
-} else {
-  axios.defaults.headers.common['Authorization'] = null;
-}
-axios.interceptors.response.use((response) => response.data)
 
 const onAuthRedirectCallback = (redirectResult?: RedirectLoginResult) => {
   // Clears auth0 query string parameters from url
