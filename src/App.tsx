@@ -3,7 +3,6 @@ import {Provider} from 'react-redux'
 import { ConnectedRouter } from "connected-react-router"
 import { createBrowserHistory } from "history"
 import {Route, Switch} from "react-router"
-import axios from 'axios'
 import './App.css'
 import {configureStore} from "./store/store"
 import {Home} from './Home'
